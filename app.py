@@ -18,7 +18,7 @@ import requests
 import gradio as gr
 import numpy as np
 import torch
-from PIL import ImageDraw
+from PIL import ImageDraw, Image
 from matplotlib import pyplot as plt
 from mmcv import Config
 from mmcv.cnn import fuse_conv_bn
@@ -298,15 +298,17 @@ with gr.Blocks() as demo:
     def set_qery(support_img):
         skeleton.clear()
         kp_src.clear()
-        return support_img
+        support_img = support_img.resize((128, 128), Image.Resampling.LANCZOS)
+        return support_img, support_img
 
 
     support_img.select(get_select_coords,
                        [support_img, posed_support],
-                       [support_img, posed_support])
+                       [support_img, posed_support],
+                       )
     support_img.upload(set_qery,
                        inputs=support_img,
-                       outputs=posed_support)
+                       outputs=[support_img,posed_support])
     posed_support.select(get_limbs,
                          posed_support,
                          posed_support)
