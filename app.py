@@ -14,7 +14,7 @@ os.system('python -m mim install "mmcv-full==1.6.2"')
 os.system('python -m mim install "mmpose==0.29.0"')
 os.system('python -m mim install "gradio==3.44.0"')
 os.system('python setup.py develop')
-
+import requests
 import gradio as gr
 import numpy as np
 import torch
@@ -318,7 +318,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Pose Anything Demo')
     parser.add_argument('--checkpoint',
                         help='checkpoint path',
-                        default='checkpoints/demo.pth')
+                        default='https://github.com/orhir/PoseAnything/releases/download/1.0.0/demo_b.pth')
     args = parser.parse_args()
     checkpoint_path = args.checkpoint
+
     demo.launch()
