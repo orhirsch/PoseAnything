@@ -92,10 +92,8 @@ def process(query_img,
     global skeleton
     cfg = Config.fromfile(cfg_path)
     kp_src_np = np.array(kp_src).copy().astype(np.float32)
-    kp_src_np[:, 0] = kp_src_np[:, 0] / original_support_image.shape[
-        0] * cfg.model.encoder_config.img_size
-    kp_src_np[:, 1] = kp_src_np[:, 1] / original_support_image.shape[
-        1] * cfg.model.encoder_config.img_size
+    kp_src_np[:, 0] = kp_src_np[:, 0] / 128. * cfg.model.encoder_config.img_size
+    kp_src_np[:, 1] = kp_src_np[:, 1] / 128. * cfg.model.encoder_config.img_size
     kp_src_np = np.flip(kp_src_np, 1).copy()
     kp_src_tensor = torch.tensor(kp_src_np).float()
     preprocess = transforms.Compose([
