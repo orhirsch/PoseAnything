@@ -189,6 +189,9 @@ with gr.Blocks() as demo:
     # Pose Anything Demo
     We present a novel approach to category agnostic pose estimation that leverages the inherent geometrical relations between keypoints through a newly designed Graph Transformer Decoder. By capturing and incorporating this crucial structural information, our method enhances the accuracy of keypoint localization, marking a significant departure from conventional CAPE techniques that treat keypoints as isolated entities.
     ### [Paper](https://arxiv.org/abs/2311.17891) | [Official Repo](https://github.com/orhir/PoseAnything) 
+    <div align=center>
+    <img src="gradio_teaser.png" width="800"/>
+    </div><br/>
     ## Instructions
     1. Upload an image of the object you want to pose on the **left** image.
     2. Click on the **left** image to mark keypoints.
@@ -200,17 +203,17 @@ with gr.Blocks() as demo:
         support_img = gr.Image(label="Support Image",
                                type="pil",
                                info='Click to mark keypoints').style(
-            height=400, width=400)
+            height=256, width=256)
         posed_support = gr.Image(label="Posed Support Image",
                                  type="pil",
-                                 interactive=False).style(height=400, width=400)
+                                 interactive=False).style(height=256, width=256)
     with gr.Row():
         query_img = gr.Image(label="Query Image",
-                             type="pil").style(height=400, width=400)
+                             type="pil").style(height=256, width=256)
     with gr.Row():
         eval_btn = gr.Button(value="Evaluate")
     with gr.Row():
-        output_img = gr.Plot(label="Output Image", height=400, width=400)
+        output_img = gr.Plot(label="Output Image", height=256, width=256)
 
 
     def get_select_coords(kp_support,
@@ -295,7 +298,7 @@ with gr.Blocks() as demo:
         return canvas_kp
 
 
-    def set_qery(support_img):
+    def set_query(support_img):
         skeleton.clear()
         kp_src.clear()
         support_img = support_img.resize((128, 128), Image.Resampling.LANCZOS)
@@ -306,7 +309,7 @@ with gr.Blocks() as demo:
                        [support_img, posed_support],
                        [support_img, posed_support],
                        )
-    support_img.upload(set_qery,
+    support_img.upload(set_query,
                        inputs=support_img,
                        outputs=[support_img,posed_support])
     posed_support.select(get_limbs,
