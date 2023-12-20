@@ -9,13 +9,13 @@ from functools import partial
 from typing import Optional
 os.system('python -m pip install timm')
 os.system('python -m pip install -U openxlab')
+os.system('python -m pip install -U pillow')
 os.system('python -m pip install Openmim')
 os.system('python -m mim install mmengine')
 os.system('python -m mim install "mmcv-full==1.6.2"')
 os.system('python -m mim install "mmpose==0.29.0"')
 os.system('python -m mim install "gradio==3.44.0"')
 os.system('python setup.py develop')
-os.system('python -m pip install -U pillow')
 import gradio as gr
 import numpy as np
 import torch
