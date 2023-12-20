@@ -318,7 +318,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Pose Anything Demo')
     parser.add_argument('--checkpoint',
                         help='checkpoint path',
-                        default='/home/xlab-app-center/.cache/model')
+                        default='/home/xlab-app-center/.cache/1shot-swin_graph_split1')
     args = parser.parse_args()
     checkpoint_path = args.checkpoint
 
