@@ -259,7 +259,9 @@ with gr.Blocks() as demo:
         w, h = canvas_kp.size
         r = int(r * w)
         width = int(width * w)
-        while len(pixels_in_queue) > 0 and curr_pixel != prev_clicked:
+        while (len(pixels_in_queue) > 0 and
+               curr_pixel != prev_clicked and
+               len(kp_src) > 0):
             pixel = pixels_in_queue.pop()
             prev_clicked = pixel
             closest_point = min(kp_src,
@@ -318,7 +320,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Pose Anything Demo')
     parser.add_argument('--checkpoint',
                         help='checkpoint path',
-                        default='/home/xlab-app-center/.cache/1shot-swin_graph_split1.pth')
+                        default='/home/xlab-app-center/.cache/PoseAnything/1shot-swin_graph_split1.pth')
     args = parser.parse_args()
     checkpoint_path = args.checkpoint
 
