@@ -219,10 +219,6 @@ with gr.Blocks() as demo:
                           limb_support,
                           evt: gr.SelectData,
                           r=0.015):
-        global original_support_image
-        if len(kp_src) == 0:
-            original_support_image = np.array(kp_support.copy())[:, :,
-                                     ::-1].copy()
         pixels_in_queue = set()
         pixels_in_queue.add((evt.index[1], evt.index[0]))
         while len(pixels_in_queue) > 0:
@@ -233,10 +229,10 @@ with gr.Blocks() as demo:
             else:
                 print("Invalid pixel")
             if limb_support is None:
-                canvas_limb = kp_support.copy()
+                canvas_limb = kp_support
             else:
-                canvas_limb = limb_support.copy()
-            canvas_kp = kp_support.copy()
+                canvas_limb = limb_support
+            canvas_kp = kp_support
             w, h = canvas_kp.size
             draw_pose = ImageDraw.Draw(canvas_kp)
             draw_limb = ImageDraw.Draw(canvas_limb)
@@ -257,7 +253,7 @@ with gr.Blocks() as demo:
         curr_pixel = (evt.index[1], evt.index[0])
         pixels_in_queue = set()
         pixels_in_queue.add((evt.index[1], evt.index[0]))
-        canvas_kp = kp_support.copy()
+        canvas_kp = kp_support
         w, h = canvas_kp.size
         r = int(r * w)
         width = int(width * w)
@@ -298,8 +294,10 @@ with gr.Blocks() as demo:
 
 
     def set_query(support_img):
+        global original_support_image
         skeleton.clear()
         kp_src.clear()
+        original_support_image = np.array(support_img)[:, :, ::-1].copy()
         support_img = support_img.resize((128, 128), Image.Resampling.LANCZOS)
         return support_img, support_img
 
