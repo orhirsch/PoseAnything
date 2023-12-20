@@ -8,29 +8,27 @@ import sys
 from functools import partial
 from typing import Optional
 os.system('python -m pip install timm')
+os.system('python -m pip install -U openxlab')
 os.system('python -m pip install Openmim')
 os.system('python -m mim install mmengine')
 os.system('python -m mim install "mmcv-full==1.6.2"')
 os.system('python -m mim install "mmpose==0.29.0"')
 os.system('python -m mim install "gradio==3.44.0"')
 os.system('python setup.py develop')
-import requests
 import gradio as gr
 import numpy as np
 import torch
 from PIL import ImageDraw, Image
 from matplotlib import pyplot as plt
 from mmcv import Config
-from mmcv.cnn import fuse_conv_bn
 from mmcv.runner import load_checkpoint
 from mmpose.core import wrap_fp16_model
 from mmpose.models import build_posenet
 from torchvision import transforms
-
 from demo import Resize_Pad
 from models import *
-from tools.visualization import str_is_int
 import matplotlib
+from openxlab.model import download
 
 matplotlib.use('agg')
 
@@ -320,8 +318,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Pose Anything Demo')
     parser.add_argument('--checkpoint',
                         help='checkpoint path',
-                        default='https://github.com/orhir/PoseAnything/releases/download/1.0.0/demo_b.pth')
+                        default='/home/xlab-app-center/.cache/model')
     args = parser.parse_args()
     checkpoint_path = args.checkpoint
 
+    download(model_repo='openxlab-app/PoseAnything',
+             model_name='1shot-swin_graph_split1')
     demo.launch()
