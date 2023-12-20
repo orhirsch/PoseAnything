@@ -15,6 +15,7 @@ os.system('python -m mim install "mmcv-full==1.6.2"')
 os.system('python -m mim install "mmpose==0.29.0"')
 os.system('python -m mim install "gradio==3.44.0"')
 os.system('python setup.py develop')
+os.system('python -m pip install -U pillow')
 import gradio as gr
 import numpy as np
 import torch
@@ -189,7 +190,7 @@ with gr.Blocks() as demo:
     # Pose Anything Demo
     We present a novel approach to category agnostic pose estimation that leverages the inherent geometrical relations between keypoints through a newly designed Graph Transformer Decoder. By capturing and incorporating this crucial structural information, our method enhances the accuracy of keypoint localization, marking a significant departure from conventional CAPE techniques that treat keypoints as isolated entities.
     ### [Paper](https://arxiv.org/abs/2311.17891) | [Official Repo](https://github.com/orhir/PoseAnything) 
-    ![](gradio_teaser.png)
+    ![](/file=gradio_teaser.png)
     ## Instructions
     1. Upload an image of the object you want to pose on the **left** image.
     2. Click on the **left** image to mark keypoints.
