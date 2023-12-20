@@ -189,9 +189,7 @@ with gr.Blocks() as demo:
     # Pose Anything Demo
     We present a novel approach to category agnostic pose estimation that leverages the inherent geometrical relations between keypoints through a newly designed Graph Transformer Decoder. By capturing and incorporating this crucial structural information, our method enhances the accuracy of keypoint localization, marking a significant departure from conventional CAPE techniques that treat keypoints as isolated entities.
     ### [Paper](https://arxiv.org/abs/2311.17891) | [Official Repo](https://github.com/orhir/PoseAnything) 
-    <div align=center>
-    <img src="gradio_teaser.png" width="800"/>
-    </div><br/>
+    ![](gradio_teaser.png)
     ## Instructions
     1. Upload an image of the object you want to pose on the **left** image.
     2. Click on the **left** image to mark keypoints.
