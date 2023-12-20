@@ -320,17 +320,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Pose Anything Demo')
     parser.add_argument('--checkpoint',
                         help='checkpoint path',
-                        default='/home/xlab-app-center/.cache/model/1shot-swin_graph_split1.pth')
+                        default='/home/xlab-app-center/.cache/model/openxlab-app_PoseAnything/1shot-swin_graph_split1.pth')
     args = parser.parse_args()
     checkpoint_path = args.checkpoint
 
     download(model_repo='openxlab-app/PoseAnything',
              model_name='1shot-swin_graph_split1')
-    for root, dirs, files in os.walk('/home/xlab-app-center/.cache'):
-        level = root.replace('/home/xlab-app-center/.cache', '').count(os.sep)
-        indent = ' ' * 4 * (level)
-        print('{}{}/'.format(indent, os.path.basename(root)))
-        subindent = ' ' * 4 * (level + 1)
-        for f in files:
-            print('{}{}'.format(subindent, f))
     demo.launch()
